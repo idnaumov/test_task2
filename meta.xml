@@ -1,0 +1,8 @@
+<meta>
+	<info author="DNaumov" description="Test task #2" />
+	<oop>true</oop>
+
+	<script src="Scripts/Client/CUIRUD.lua" type="client" cache="false"/>
+	<script src="Scripts/Client/Client.lua" type="client" cache="false"/>
+	<script src="Scripts/Server/Server.lua" type="server" cache="false"/>
+</meta>
