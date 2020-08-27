@@ -154,43 +154,35 @@ function CreateUI()
 			searchColumn = 0;
 			request = 'SELECT * FROM users ';
 			
-			if ( utf8.len( SearchName ) >= 1 ) then
-				if searchColumn == 0 then
-					request = request..'WHERE name = ?';
-				elseif searchColumn >= 1 then
-					request = request..' AND name = ?';
-				end
-				searchColumn = searchColumn + 1
+			
+			local args = {};
+			local conditions = {};
+
+			if ( utf8.len ( SearchName ) >= 1 ) then
+				table.insert(conditions, " `??` = ?");
+				table.insert(args, 'name');
+				table.insert(args, SearchName);
+			end
+
+			if ( utf8.len ( SearchLastName ) >= 1 ) then
+				table.insert(conditions, " `??` = ?");
+				table.insert(args, 'last_name');
+				table.insert(args, SearchLastName);
+			end
+
+			if ( utf8.len ( SearchAdress ) >= 1 ) then
+				table.insert(conditions, " `??` = ?");
+				table.insert(args, 'address');
+				table.insert(args, SearchAdress);
 			end
 			
-			if ( utf8.len( SearchLastName ) >= 1 ) then
-				
-				if searchColumn == 0 then
-					request = request..'WHERE last_name = ?';
-				elseif searchColumn >= 1 then
-					request = request..' AND last_name = ?';
-				end
-				
-				searchColumn = searchColumn + 1
-			end
-			
-			if ( utf8.len( SearchAdress ) >= 1 ) then
-				
-				if searchColumn == 0 then
-					request = request..'WHERE address = ?';
-				elseif searchColumn >= 1 then
-					request = request..' AND address = ?';
-				end
-				
-				searchColumn = searchColumn + 1;
-				
-			end
+			local sQuery = "SELECT * FROM `users` WHERE"..table.concat(conditions, " AND ").. " ";
+			local pQuery = unpack(args);
+			print (unpack(args))
 			
 			dgsGridListClear (gridListCrude)
 
-			triggerServerEvent('onPlayerSearch',localPlayer, request, SearchName, SearchLastName, SearchAdress);
-			
-			collectgarbage();
+			triggerServerEvent('onPlayerSearch',localPlayer, sQuery, pQuery);
 		
 		end, false	);
 	

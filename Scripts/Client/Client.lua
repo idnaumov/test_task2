@@ -3,9 +3,9 @@ local screen = Vector2( guiGetScreenSize() );
 local events = {};
 
 function AddRPCEvent( event, callback )
-	addEventHandler( event, root, callback );
+	addEventHandler( event, resourceRoot, callback );
 	
-	table.insert( events, { event, root, callback } );
+	table.insert( events, { event, resourceRoot, callback } );
 end
 
 function RemoveEvents()
