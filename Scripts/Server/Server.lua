@@ -27,7 +27,7 @@ addEventHandler( "onPlayerSearch", root,
 			
 			triggerClientEvent( source, "onClientReciveUsers", source, result );
 			outputChatBox(request	)
-		end, { client }, connect, request, searchElement );
+		end, { client }, connect, request );
 	end
 );
 
