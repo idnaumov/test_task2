@@ -9,7 +9,7 @@ addEventHandler( "onResourceStart", resourceRoot,
 );
 
 addEvent( "onPlayerRequestListUsers", true );
-addEventHandler( "onPlayerRequestListUsers", root,
+addEventHandler( "onPlayerRequestListUsers", resourceRoot,
 	function()
 		dbQuery( function( query, source )
 			local result = dbPoll( query, 0 );
@@ -20,19 +20,18 @@ addEventHandler( "onPlayerRequestListUsers", root,
 );
 
 addEvent( "onPlayerSearch", true );
-addEventHandler( "onPlayerSearch", root,
-	function( sQuery, pQuery )
+addEventHandler( "onPlayerSearch", resourceRoot,
+	function( request, SearchName, SearchLastName, SearchAdress )
 		dbQuery( function( query, source )
 			local result = dbPoll( query, 0 );
 			
 			triggerClientEvent( source, "onClientReciveUsers", source, result );
-			print( sQuery..' - '..pQuery )
-		end, { client }, connect, sQuery, pQuery);
+		end, { client }, connect, request, SearchName, SearchLastName, SearchAdress);
 	end
 );
 
 addEvent( "onPlayerAddUser", true );
-addEventHandler( "onPlayerAddUser", root,
+addEventHandler( "onPlayerAddUser", resourceRoot,
 	function( user )
 		dbQuery( function( query, source )
 			local _, _, id = dbPoll( query, 0 );
@@ -45,7 +44,7 @@ addEventHandler( "onPlayerAddUser", root,
 );
 
 addEvent( "onPlayerRemoveUser", true );
-addEventHandler( "onPlayerRemoveUser", root,
+addEventHandler( "onPlayerRemoveUser", resourceRoot,
 	function( user )
 		dbQuery( function( query, source )
 			triggerClientEvent( source, "onClientRemoveUserCrud", source, user );
@@ -54,7 +53,7 @@ addEventHandler( "onPlayerRemoveUser", root,
 );
 
 addEvent( "onPlayerEditUser", true );
-addEventHandler( "onPlayerEditUser", root,
+addEventHandler( "onPlayerEditUser", resourceRoot,
 	function( user )
 		dbQuery( function( query, source )	
 			triggerClientEvent( source, "onClientEditUserCrud", source, user );

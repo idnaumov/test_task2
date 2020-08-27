@@ -158,30 +158,44 @@ function CreateUI()
 			local args = {};
 			local conditions = {};
 
-			if ( utf8.len ( SearchName ) >= 1 ) then
-				table.insert(conditions, " `??` = ?");
-				table.insert(args, 'name');
-				table.insert(args, SearchName);
+			if ( utf8.len( SearchName ) >= 1 ) then
+				if searchColumn == 0 then
+					request = request..'WHERE name = ?';
+				elseif searchColumn >= 1 then
+					request = request..' AND name = ?';
+				end
+				searchColumn = searchColumn + 1
 			end
 
-			if ( utf8.len ( SearchLastName ) >= 1 ) then
-				table.insert(conditions, " `??` = ?");
-				table.insert(args, 'last_name');
-				table.insert(args, SearchLastName);
+			if ( utf8.len( SearchLastName ) >= 1 ) then
+
+				if searchColumn == 0 then
+					request = request..'WHERE last_name = ?';
+				elseif searchColumn >= 1 then
+					request = request..' AND last_name = ?';
+				end
+
+				searchColumn = searchColumn + 1
+			end
+			
+			if ( utf8.len( SearchAdress ) >= 1 ) then
+
+				if searchColumn == 0 then
+					request = request..'WHERE address = ?';
+				elseif searchColumn >= 1 then
+
+					request = request..' AND address = ?';
+				end
 			end
 
-			if ( utf8.len ( SearchAdress ) >= 1 ) then
-				table.insert(conditions, " `??` = ?");
-				table.insert(args, 'address');
-				table.insert(args, SearchAdress);
-			end
+			searchColumn = searchColumn + 1;
 			
 			local sQuery = "SELECT * FROM `users` WHERE"..table.concat(conditions, " AND ").. " ";
 			local pQuery = unpack(args);
 			
 			dgsGridListClear (gridListCrude)
 
-			triggerServerEvent('onPlayerSearch',root, sQuery, pQuery);
+			triggerServerEvent('onPlayerSearch',resourceRoot, request, SearchName, SearchLastName, SearchAdress);
 		
 		end, false	);
 	
