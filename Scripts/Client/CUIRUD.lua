@@ -6,30 +6,20 @@ local windowCrude;
 function CreateUI()
 	
 	if toggle then
-	
 		toggle = false;
-		
 		destroyElement( windowCrude );
-		
 		showCursor( false );
-		
 		RemoveEvents();
-		
 	else
-	
-		toggle = true
-		
+		toggle = true;
 		local listPlayers = {};
-
+		
 		windowCrude 		= dgsCreateWindow( screen.x / 2 - 500 / 2, screen.y / 2 - 500 / 2, 500, 420, "DNaumov CRUD", false );
 		
 		addEventHandler( "onDgsWindowClose", windowCrude, function()
 			toggle = false;
-			
 			showCursor( false );
-		
 			destroyElement( windowCrude );
-			
 			RemoveEvents();
 		end, false );
 	
@@ -132,11 +122,11 @@ function CreateUI()
 			end
 			return;
 		end
-		-- [[ ПОИСК 1 ]] --
+		-- [[ ПОИСК 1 ПО ИМЕНИ ]] --
 		local btnSearch1 = dgsCreateEdit( 30, 300, 100, 30, "", false, windowCrude );
-		-- [[ ПОИСК 2 ]] --
+		-- [[ ПОИСК 2 ПО ФАМИЛИИ ]] --
 		local btnSearch2 = dgsCreateEdit( 140, 300, 100, 30, "", false, windowCrude );
-		-- [[ ПОИСК 2 ]] --
+		-- [[ ПОИСК 2 ПО АДРЕСУ ]] --
 		local btnSearch3 = dgsCreateEdit( 250, 300, 100, 30, "", false, windowCrude );
 		-- [[ КНОПКА ПОИСКА ]] --
 		local btnStartSearch = dgsCreateButton( 360, 300, 100, 30, "ПОИСК", false, windowCrude );
@@ -189,8 +179,6 @@ function CreateUI()
 			dgsGridListClear (gridListCrude)
 
 			triggerServerEvent('onPlayerSearch',localPlayer, request);
-			
-			collectgarbage();
 		
 		end, false	);
 	
