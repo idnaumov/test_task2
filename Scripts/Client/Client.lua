@@ -17,5 +17,5 @@ function RemoveEvents()
 end
 
 function ServerCall( event, args )
-	triggerServerEvent( event, root, args or {} );
+	triggerServerEvent( event, resourceRoot, args or {} );
 end

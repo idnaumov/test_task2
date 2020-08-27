@@ -12,7 +12,7 @@ addEvent( "onPlayerRequestListUsers", true );
 addEventHandler( "onPlayerRequestListUsers", resourceRoot,
 	function()
 		dbQuery( function( query, source )
-			local result = dbPoll( query, 0 );
+			local result = dbPoll( query, -1 );
 			
 			triggerClientEvent( source, "onClientReciveUsers", source, result );
 		end, { client }, connect, "SELECT id, name, last_name, address FROM users" );
@@ -23,7 +23,7 @@ addEvent( "onPlayerSearch", true );
 addEventHandler( "onPlayerSearch", resourceRoot,
 	function( request, SearchName, SearchLastName, SearchAdress )
 		dbQuery( function( query, source )
-			local result = dbPoll( query, 0 );
+			local result = dbPoll( query, -1 );
 			
 			triggerClientEvent( source, "onClientReciveUsers", source, result );
 		end, { client }, connect, request, SearchName, SearchLastName, SearchAdress);
@@ -34,7 +34,7 @@ addEvent( "onPlayerAddUser", true );
 addEventHandler( "onPlayerAddUser", resourceRoot,
 	function( user )
 		dbQuery( function( query, source )
-			local _, _, id = dbPoll( query, 0 );
+			local _, _, id = dbPoll( query, -1 );
 			
 			user.id = id;
 			
