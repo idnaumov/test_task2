@@ -178,11 +178,10 @@ function CreateUI()
 			
 			local sQuery = "SELECT * FROM `users` WHERE"..table.concat(conditions, " AND ").. " ";
 			local pQuery = unpack(args);
-			print (unpack(args))
 			
 			dgsGridListClear (gridListCrude)
 
-			triggerServerEvent('onPlayerSearch',localPlayer, sQuery, pQuery);
+			triggerServerEvent('onPlayerSearch',root, sQuery, pQuery);
 		
 		end, false	);
 	

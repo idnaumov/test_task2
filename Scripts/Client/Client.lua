@@ -3,9 +3,9 @@ local screen = Vector2( guiGetScreenSize() );
 local events = {};
 
 function AddRPCEvent( event, callback )
-	addEventHandler( event, resourceRoot, callback );
+	addEventHandler( event, root, callback );
 	
-	table.insert( events, { event, resourceRoot, callback } );
+	table.insert( events, { event, root, callback } );
 end
 
 function RemoveEvents()
@@ -17,5 +17,5 @@ function RemoveEvents()
 end
 
 function ServerCall( event, args )
-	triggerServerEvent( event, resourceRoot, args or {} );
+	triggerServerEvent( event, root, args or {} );
 end

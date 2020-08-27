@@ -21,12 +21,12 @@ addEventHandler( "onPlayerRequestListUsers", root,
 
 addEvent( "onPlayerSearch", true );
 addEventHandler( "onPlayerSearch", root,
-	function( sQuery,  pQuery )
+	function( sQuery, pQuery )
 		dbQuery( function( query, source )
 			local result = dbPoll( query, 0 );
 			
 			triggerClientEvent( source, "onClientReciveUsers", source, result );
-			print( sQuery..' - '.. )
+			print( sQuery..' - '..pQuery )
 		end, { client }, connect, sQuery, pQuery);
 	end
 );
