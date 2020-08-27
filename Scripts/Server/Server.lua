@@ -26,7 +26,8 @@ addEventHandler( "onPlayerSearch", root,
 			local result = dbPoll( query, 0 );
 			
 			triggerClientEvent( source, "onClientReciveUsers", source, result );
-		end, { client }, connect, request );
+			outputChatBox(request	)
+		end, { client }, connect, request, searchElement );
 	end
 );
 

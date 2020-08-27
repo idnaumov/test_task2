@@ -158,7 +158,7 @@ function CreateUI()
 				if searchColumn == 0 then
 					request = request..'WHERE name = "'..SearchName..'"';
 				elseif searchColumn >= 1 then
-					request = request..'AND name = "'..SearchName..'"';
+					request = request..' AND name = "'..SearchName..'"';
 				end
 				searchColumn = searchColumn + 1
 			end
@@ -168,7 +168,7 @@ function CreateUI()
 				if searchColumn == 0 then
 					request = request..'WHERE last_name = "'..SearchLastName..'"';
 				elseif searchColumn >= 1 then
-					request = request..'AND last_name = "'..SearchLastName..'"';
+					request = request..' AND last_name = "'..SearchLastName..'"';
 				end
 				
 				searchColumn = searchColumn + 1
@@ -179,7 +179,7 @@ function CreateUI()
 				if searchColumn == 0 then
 					request = request..'WHERE address = "'..SearchAdress..'"';
 				elseif searchColumn >= 1 then
-					request = request..'AND address = "'..SearchAdress..'"';
+					request = request..' AND address = "'..SearchAdress..'"';
 				end
 				
 				searchColumn = searchColumn + 1;
