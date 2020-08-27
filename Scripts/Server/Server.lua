@@ -21,13 +21,13 @@ addEventHandler( "onPlayerRequestListUsers", root,
 
 addEvent( "onPlayerSearch", true );
 addEventHandler( "onPlayerSearch", root,
-	function(request)
+	function( request, SearchName, SearchLastName, SearchAdress )
 		dbQuery( function( query, source )
 			local result = dbPoll( query, 0 );
 			
 			triggerClientEvent( source, "onClientReciveUsers", source, result );
-			outputChatBox(request	)
-		end, { client }, connect, request );
+			outputChatBox( request )
+		end, { client }, connect, request, SearchName, SearchLastName, SearchAdress);
 	end
 );
 

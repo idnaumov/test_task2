@@ -1,3 +1,5 @@
+local screen = Vector2( guiGetScreenSize() );
+
 local events = {};
 
 function AddRPCEvent( event, callback )

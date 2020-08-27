@@ -6,20 +6,30 @@ local windowCrude;
 function CreateUI()
 	
 	if toggle then
+	
 		toggle = false;
-		destroyElement( windowCrude );
-		showCursor( false );
-		RemoveEvents();
-	else
-		toggle = true;
-		local listPlayers = {};
 		
+		destroyElement( windowCrude );
+		
+		showCursor( false );
+		
+		RemoveEvents();
+		
+	else
+	
+		toggle = true
+		
+		local listPlayers = {};
+
 		windowCrude 		= dgsCreateWindow( screen.x / 2 - 500 / 2, screen.y / 2 - 500 / 2, 500, 420, "DNaumov CRUD", false );
 		
 		addEventHandler( "onDgsWindowClose", windowCrude, function()
 			toggle = false;
+			
 			showCursor( false );
+		
 			destroyElement( windowCrude );
+			
 			RemoveEvents();
 		end, false );
 	
@@ -122,11 +132,11 @@ function CreateUI()
 			end
 			return;
 		end
-		-- [[ ПОИСК 1 ПО ИМЕНИ ]] --
+		-- [[ ПОИСК 1 ]] --
 		local btnSearch1 = dgsCreateEdit( 30, 300, 100, 30, "", false, windowCrude );
-		-- [[ ПОИСК 2 ПО ФАМИЛИИ ]] --
+		-- [[ ПОИСК 2 ]] --
 		local btnSearch2 = dgsCreateEdit( 140, 300, 100, 30, "", false, windowCrude );
-		-- [[ ПОИСК 2 ПО АДРЕСУ ]] --
+		-- [[ ПОИСК 2 ]] --
 		local btnSearch3 = dgsCreateEdit( 250, 300, 100, 30, "", false, windowCrude );
 		-- [[ КНОПКА ПОИСКА ]] --
 		local btnStartSearch = dgsCreateButton( 360, 300, 100, 30, "ПОИСК", false, windowCrude );
@@ -146,9 +156,9 @@ function CreateUI()
 			
 			if ( utf8.len( SearchName ) >= 1 ) then
 				if searchColumn == 0 then
-					request = request..'WHERE name = "'..SearchName..'"';
+					request = request..'WHERE name = ?';
 				elseif searchColumn >= 1 then
-					request = request..' AND name = "'..SearchName..'"';
+					request = request..' AND name = ?';
 				end
 				searchColumn = searchColumn + 1
 			end
@@ -156,9 +166,9 @@ function CreateUI()
 			if ( utf8.len( SearchLastName ) >= 1 ) then
 				
 				if searchColumn == 0 then
-					request = request..'WHERE last_name = "'..SearchLastName..'"';
+					request = request..'WHERE last_name = ?';
 				elseif searchColumn >= 1 then
-					request = request..' AND last_name = "'..SearchLastName..'"';
+					request = request..' AND last_name = ?';
 				end
 				
 				searchColumn = searchColumn + 1
@@ -167,9 +177,9 @@ function CreateUI()
 			if ( utf8.len( SearchAdress ) >= 1 ) then
 				
 				if searchColumn == 0 then
-					request = request..'WHERE address = "'..SearchAdress..'"';
+					request = request..'WHERE address = ?';
 				elseif searchColumn >= 1 then
-					request = request..' AND address = "'..SearchAdress..'"';
+					request = request..' AND address = ?';
 				end
 				
 				searchColumn = searchColumn + 1;
@@ -178,7 +188,9 @@ function CreateUI()
 			
 			dgsGridListClear (gridListCrude)
 
-			triggerServerEvent('onPlayerSearch',localPlayer, request);
+			triggerServerEvent('onPlayerSearch',localPlayer, request, SearchName, SearchLastName, SearchAdress);
+			
+			collectgarbage();
 		
 		end, false	);
 	
